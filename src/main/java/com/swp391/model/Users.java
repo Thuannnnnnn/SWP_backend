@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 public class Users {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private int UserID;
+	 private int user_id;
 	 private String full_name;
 	 private String birth_date;
 	 private String phone_number;
@@ -21,10 +21,10 @@ public class Users {
 		// TODO Auto-generated constructor stub
 	}
 	public int getUserID() {
-		return UserID;
+		return user_id;
 	}
 	public void setUserID(int userID) {
-		UserID = userID;
+		user_id = userID;
 	}
 	public String getFull_name() {
 		return full_name;
