@@ -20,6 +20,20 @@ public class Users {
 	 public Users() {
 		// TODO Auto-generated constructor stub
 	}
+	 
+	public Users(int user_id, String full_name, String birth_date, String phone_number, String email, String passwords,
+			String address, String user_role) {
+		super();
+		this.user_id = user_id;
+		this.full_name = full_name;
+		this.birth_date = birth_date;
+		this.phone_number = phone_number;
+		this.email = email;
+		this.passwords = passwords;
+		this.address = address;
+		this.user_role = user_role;
+	}
+
 	public int getUserID() {
 		return user_id;
 	}

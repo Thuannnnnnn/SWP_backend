@@ -23,8 +23,29 @@ public class Root{
     
     
     public Root() {
-		// TODO Auto-generated constructor stub
 	}
+    
+	public Root(String at_hash, String sub, boolean email_verified, String iss, String given_name, String locale,
+			String nonce, String picture, ArrayList<String> aud, String azp, String name, Date exp, String family_name,
+			Date iat, String email) {
+		super();
+		this.at_hash = at_hash;
+		this.sub = sub;
+		this.email_verified = email_verified;
+		this.iss = iss;
+		this.given_name = given_name;
+		this.locale = locale;
+		this.nonce = nonce;
+		this.picture = picture;
+		this.aud = aud;
+		this.azp = azp;
+		this.name = name;
+		this.exp = exp;
+		this.family_name = family_name;
+		this.iat = iat;
+		this.email = email;
+	}
+
 	public String getAt_hash() {
 		return at_hash;
 	}
