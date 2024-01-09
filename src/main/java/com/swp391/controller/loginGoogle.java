@@ -1,5 +1,6 @@
 package com.swp391.controller;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,32 +11,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.swp391.model.Users;
+import com.swp391.service.JwtService;
 import com.swp391.service.UserService;
+
 @RestController
 @RequestMapping("/api")
 public class loginGoogle {
 
-	@Autowired
-	private UserService Us;
+    @Autowired
+    private UserService userService;
 
-	@GetMapping("/signgoogle")
-	 public ResponseEntity<Users> currentUser(OAuth2AuthenticationToken oAuthenticationToken) {
+    @Autowired
+    private JwtService jwtService;
+
+    @GetMapping("/signgoogle")
+    public ResponseEntity<?> currentUser(OAuth2AuthenticationToken oAuthenticationToken) {
         Map<String, Object> attributes = oAuthenticationToken.getPrincipal().getAttributes();
 
         String email = toPerson(attributes).getEmail();
-        System.out.println(email);
- 
-        if (Us.isEmailExists(email.toLowerCase())) {
-        	Users user = Us.getUserByEmail(email);
-	        HttpHeaders headers = new HttpHeaders();
-	        System.out.println("Logged in successfully");
-	        headers.add("message", "Logged in successfully");
-	        return ResponseEntity.ok().headers(headers).body(user);
+
+        if (userService.isEmailExists(email.toLowerCase())) {
+            Users user = userService.getUserByEmail(email);
+            String token = jwtService.generateToken(user.getEmail());
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+            return ResponseEntity.ok().headers(headers).body(user);
         } else {
-        	System.out.println("no Oke");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
     }
+
+
+
 	
 
 	public Root toPerson(Map<String, Object> map) {
