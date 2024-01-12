@@ -33,7 +33,7 @@ public class ProductServiceImpl implements IProductsService{
 		if(products != null) {
 			Products products1 = productsRepository.getById(id);
 			if(products1 != null) {
-				products1.setProduct_name(products1.getProduct_name());
+				products1.setProduct_name(products.getProduct_name());
 				products1.setDescription(products.getDescription());
 				products1.setPrice(products.getPrice());
 				products1.setDiscount_percentage(products.getDiscount_percentage());
