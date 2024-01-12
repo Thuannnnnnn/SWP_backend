@@ -26,14 +26,9 @@ public class loginGoogle {
 
     @GetMapping("/oauth2/user")
     public ResponseEntity<Map<String, Object>> getUser(OAuth2AuthenticationToken oAuthenticationToken) {
-        Map<String, Object> attributes = oAuthenticationToken.getPrincipal().getAttributes();
-        
-        // Assuming 'toPerson' is a method that converts the attributes to a user object.
-        String email = toPerson(attributes).getEmail();
-        
-        // Generate JWT token
+        Map<String, Object> attributes = oAuthenticationToken.getPrincipal().getAttributes();   
+        String email = toPerson(attributes).getEmail();       
         String token = jwtService.generateToken(email);
-
         HttpHeaders headers = new HttpHeaders();
         headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + token);
         headers.add("message", "Logged in successfully with OAuth2");
