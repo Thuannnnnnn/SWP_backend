@@ -46,15 +46,4 @@ public class ProductsController {
 		return iProductsService.deleteProducts(id);
 	}
 	
-	//API lay danh sach
-	@GetMapping("/list")
-	public String getAllProduct() {
-		return iProductsService.getAllEProducts().get(0).getProduct_id();
-	}
-	
-	//API lay danh sach
-	@GetMapping("/feedBack")
-	public List<Products> getAllFeedback() {
-		return iProductsService.getAllEProducts();
-	}
 }
