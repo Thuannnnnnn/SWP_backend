@@ -33,10 +33,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             try {
                 String username = jwtService.generateToken(token);
                 if (username != null) {
+                	if(jwtService.validateToken(token)) {
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                             username, null, Collections.emptyList());
                     SecurityContextHolder.getContext().setAuthentication(auth);
-                }
+                }}
             } catch (Exception e) {
                 // Xử lý trường hợp token không hợp lệ
             }
