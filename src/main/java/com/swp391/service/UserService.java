@@ -13,7 +13,7 @@ import java.util.List;
 public class UserService {
 	@Autowired
 	private UsersRepository ur;
-
+	
 	public List<Users> getAllUsers() {
 		return ur.findAll();
 
@@ -25,6 +25,7 @@ public class UserService {
 	}
 
 	public boolean isEmailExists(String email) {
+		
 		return ur.findByEmail(email) != null;
 	}
 
