@@ -2,7 +2,7 @@ package com.swp391.service;
 
 import java.util.List;
 
-
+import com.swp391.model.Feedbacks;
 import com.swp391.model.Products;
 
 import jakarta.persistence.EntityManager;
@@ -22,10 +22,25 @@ public interface IProductsService {
 	// Ham select products
 	public List<Products> getAllEProducts();
 	
-	// Ham select Top1 product
-	public Products getOneProduct(String ID);
 
-	public List<Products> getProducts();
+	
+	// Ham sort Asc price
+		public List<Products> getAllProductsSortedByPriceAsc();
+		
+		// Ham sort Desc price
+		public List<Products> getAllProductsSortedByPriceDesc();
+		
+		// Ham sort Asc StockQuantity
+		public List<Products> getAllProductsSortedByStockQuantityAsc();
+		
+		// Ham sort Desc StockQuantity
+		public List<Products> getAllProductsSortedByStockQuantityDesc();
+		
+		// Ham sort Asc StockQuantity
+		public List<Products> getAllProductsSortedByNameAsc();
+		
+		// Ham sort Desc StockQuantity
+		public List<Products> getAllProductsSortedByNameDesc();
 
 	
 }

@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.swp391.model.Products;
+import com.swp391.model.Feedbacks;
+import com.swp391.model.product_in_order;
 import com.swp391.repository.ProductsRepository;
-
 
 @Service
 public class ProductServiceImpl implements IProductsService{
@@ -52,7 +54,7 @@ public class ProductServiceImpl implements IProductsService{
 		if(product_id != null) {
 			Products products = productsRepository.getById(product_id);
 			if(products != null) {
-				 productsRepository.deleteProductAndRelatedData(product_id);
+				 productsRepository.deleteById(product_id);
 				 return true;
 			}
 			return false;
@@ -67,15 +69,36 @@ public class ProductServiceImpl implements IProductsService{
 	}
 	
 
-	@Override
-	public Products getOneProduct(String id) {
-		
-		return productsRepository.getById(id);
+
+	public List<Products> getAllProductsSortedByPriceAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "price");
+		return productsRepository.findAll(sort);
 	}
 
-	@Override
-	public List<Products> getProducts() {
-		return productsRepository.findAll();
+	public List<Products> getAllProductsSortedByPriceDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "price");
+		return productsRepository.findAll(sort);
 	}
+
+		public List<Products> getAllProductsSortedByStockQuantityAsc() {
+			Sort sort = Sort.by(Sort.Direction.ASC, "stockQuantity");
+			return productsRepository.findAll(sort);
+		}
+
+	public List<Products> getAllProductsSortedByStockQuantityDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "stockQuantity");
+		return productsRepository.findAll(sort);
+	}
+
+	public List<Products> getAllProductsSortedByNameAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC, "productName");
+		return productsRepository.findAll(sort);
+	}
+
+	public List<Products> getAllProductsSortedByNameDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "productName");
+		return productsRepository.findAll(sort);
+	}
+
 	
 }

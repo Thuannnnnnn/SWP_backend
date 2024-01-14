@@ -2,6 +2,8 @@ package com.swp391.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,10 +20,10 @@ public class Products {
 	
 	@Id
 	@Column(name = "product_id", updatable = false, nullable = false)
-	private String product_id;
+	private String productId;
 	
 	@Column(name = "product_name") 
-	private String product_name;
+	private String productName;
 	
 	@Column(name = "description")
 	private String description;
@@ -30,39 +32,47 @@ public class Products {
 	private float price;
 	
 	@Column(name = "discount_percentage")
-	private float discount_percentage;
+	private float discountPercentage;
 	
 	@Column(name = "image_url")
-	private String image_url;
+	private String imageUrl;
 	
 	@Column(name = "stock_quantity")
-	private int stock_quantity;
+	private int stockQuantity;
 	
 	@Column(name = "category_id")
-	private int category_id;
+	private int categoryId;
 	
 	@Column(name = "author")
 	private String author;
 	
 	@Column(name = "date_added")
-	private String date_added;
+	private String dateAdded;
 
+	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Feedbacks> Feedbacks;
+	
+	@OneToMany(mappedBy = "products",cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<product_in_order> product_in_order;
+	
 	public Products() {
 	}
 
 
 	public Products(String product_id, String product_name, String description, float price, float discount_percentage,
 			String image_url, int stock_quantity, int category_id, String author, String date_added) {
-		this.product_id = product_id;
-		this.product_name = product_name;
+		this.productId = product_id;
+		this.productName = product_name;
 		this.description = description;
 		this.price = price;
-		this.discount_percentage = discount_percentage;
-		this.image_url = image_url;
-		this.stock_quantity = stock_quantity;
-		this.category_id = category_id;
+		this.discountPercentage = discount_percentage;
+		this.imageUrl = image_url;
+		this.stockQuantity = stock_quantity;
+		this.categoryId = category_id;
 		this.author = author;
-		this.date_added = date_added;
+		this.dateAdded = date_added;
 	}
 
 
@@ -77,25 +87,25 @@ public class Products {
 
 
 	public String getProduct_id() {
-		return product_id;
+		return productId;
 	}
 
 
 
 
 	public void setProduct_id(String product_id) {
-		this.product_id = product_id;
+		this.productId = product_id;
 	}
 
 
 
 
 	public String getProduct_name() {
-		return product_name;
+		return productName;
 	}
 
 	public void setProduct_name(String product_name) {
-		this.product_name = product_name;
+		this.productName = product_name;
 	}
 
 	public float getPrice() {
@@ -107,35 +117,35 @@ public class Products {
 	}
 
 	public float getDiscount_percentage() {
-		return discount_percentage;
+		return discountPercentage;
 	}
 
 	public void setDiscount_percentage(float discount_percentage) {
-		this.discount_percentage = discount_percentage;
+		this.discountPercentage = discount_percentage;
 	}
 
 	public String getImage_url() {
-		return image_url;
+		return imageUrl;
 	}
 
 	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+		this.imageUrl = image_url;
 	}
 
 	public int getStock_quantity() {
-		return stock_quantity;
+		return stockQuantity;
 	}
 
 	public void setStock_quantity(int stock_quantity) {
-		this.stock_quantity = stock_quantity;
+		this.stockQuantity = stock_quantity;
 	}
 
 	public int getCategory_id() {
-		return category_id;
+		return categoryId;
 	}
 
 	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+		this.categoryId = category_id;
 	}
 
 	public String getAuthor() {
@@ -147,12 +157,23 @@ public class Products {
 	}
 
 	public String getDate_added() {
-		return date_added;
+		return dateAdded;
 	}
 
 	public void setDate_added(String date_added) {
-		this.date_added = date_added;
+		this.dateAdded = date_added;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Products [product_id=" + productId + ", product_name=" + productName + ", price=" + price
+				+ ", stock_quantity=" + stockQuantity + "]";
+	}
+
+
+	
+	
 	
 	
 	
