@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.swp391.service.md5;
 import com.swp391.service.UserService;
 @RestController
 @RequestMapping("/api")
+
 public class LoginEmail {
 	@Autowired
 	private UserService Us;
@@ -27,6 +29,7 @@ public class LoginEmail {
 	    private JwtService jwtService;
 	 @PostMapping("/signIn")
 	 public ResponseEntity<Object> LoginEmail(@RequestBody LoginRequest loginRequest) {
+		 
 		    String email = loginRequest.getEmail();
 		    String password = loginRequest.getPassword();
 		    System.out.println(email);

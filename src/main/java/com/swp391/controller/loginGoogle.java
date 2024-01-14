@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.nimbusds.oauth2.sdk.Response;
 import com.swp391.service.JwtService;
 
 @RestController
@@ -24,8 +27,14 @@ public class loginGoogle {
     @Autowired
     private JwtService jwtService; // Assuming JwtService is a service you have for JWT operations
 
+    @GetMapping("/google")
+    public RedirectView googleLogin() {
+        // Sử dụng RedirectView để chuyển hướng
+        return new RedirectView("/oauth2/authorization/google");
+    }
     @GetMapping("/oauth2/user")
     public ResponseEntity<Map<String, Object>> getUser(OAuth2AuthenticationToken oAuthenticationToken) {
+    
         Map<String, Object> attributes = oAuthenticationToken.getPrincipal().getAttributes();   
         String email = toPerson(attributes).getEmail();       
         String token = jwtService.generateToken(email);
