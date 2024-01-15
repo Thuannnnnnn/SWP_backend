@@ -7,6 +7,7 @@ import com.swp391.repository.UsersRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -53,6 +54,10 @@ public class UserService {
 		}
 
 		return false;
+	}
+	
+	public Optional<Users> showUserById(Integer userId){	
+		return ur.findById(userId);
 	}
 	
 }

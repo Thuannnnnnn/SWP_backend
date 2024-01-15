@@ -7,13 +7,15 @@ import org.apache.catalina.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "Orders")
 @JsonIgnoreProperties({"users"})
@@ -32,8 +34,10 @@ public class Orders {
 	
 	@ManyToOne
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    @JsonManagedReference
     private Users users;
+	
+	@OneToMany(mappedBy = "orders",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<product_in_order> product_in_order;
 
 	public Orders() {
 

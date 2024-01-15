@@ -45,8 +45,16 @@ public class Users {
     private String user_role;
 
     @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Orders> orders;
+    
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    
+    private List<ReplyComment> replycomments;
+    
+    @OneToMany(mappedBy = "feedback_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    
+    private List<Feedbacks> feedbacks;
+    
     
     public List<Orders> getOrders() {
 		return orders;
