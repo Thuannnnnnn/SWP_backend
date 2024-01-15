@@ -3,17 +3,13 @@ package com.swp391.controller;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
-
-import com.nimbusds.oauth2.sdk.Response;
 import com.swp391.service.JwtService;
 
 @RestController

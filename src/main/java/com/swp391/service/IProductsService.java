@@ -1,13 +1,6 @@
 package com.swp391.service;
-
 import java.util.List;
-
-import com.swp391.model.Feedbacks;
 import com.swp391.model.Products;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
 public interface IProductsService {
 	
 	// Ham add products
