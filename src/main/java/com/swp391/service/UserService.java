@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.swp391.model.Users;
 import com.swp391.repository.UsersRepository;
 
-import jakarta.transaction.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,37 +15,38 @@ import java.util.Optional;
 public class UserService {
 	@Autowired
 	private UsersRepository ur;
-	
+
 	public List<Users> getAllUsers() {
 		return ur.findAll();
 
 	}
+
 	public boolean save(Users user) {
-        return ur.save(user) != null;
-    }
-	
+		return ur.save(user) != null;
+	}
+
 	public boolean updateUsers(Integer userId, Users updatedUser) {
-        Users existingUser = ur.findById(userId).orElse(null);
+		Users existingUser = ur.findById(userId).orElse(null);
 
-        if (existingUser != null) {
-            // Cập nhật các trường của người dùng hiện tại với các giá trị mới
-            existingUser.setFull_name(updatedUser.getFull_name());
-            existingUser.setBirth_date(updatedUser.getBirth_date());
-            existingUser.setPhone_number(updatedUser.getPhone_number());
-            existingUser.setEmail(updatedUser.getEmail());
-            existingUser.setPasswords(updatedUser.getPasswords());
-            existingUser.setAddress(updatedUser.getAddress());
-            existingUser.setUser_role(updatedUser.getUser_role());
+		if (existingUser != null) {
+			// Cập nhật các trường của người dùng hiện tại với các giá trị mới
+			existingUser.setFull_name(updatedUser.getFull_name());
+			existingUser.setBirth_date(updatedUser.getBirth_date());
+			existingUser.setPhone_number(updatedUser.getPhone_number());
+			existingUser.setEmail(updatedUser.getEmail());
+			existingUser.setPasswords(updatedUser.getPasswords());
+			existingUser.setAddress(updatedUser.getAddress());
+			existingUser.setUser_role(updatedUser.getUser_role());
 
-            // Lưu người dùng đã cập nhật
-            ur.save(existingUser);
+			// Lưu người dùng đã cập nhật
+			ur.save(existingUser);
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
-	
+		return false;
+	}
+
 	@Transactional
 	public boolean deleteUserData(Integer id) {
 		if (id >= 1) {
@@ -60,10 +59,13 @@ public class UserService {
 
 		return false;
 	}
-	
-	public Optional<Users> showUserById(Integer userId){	
+
+	public Optional<Users> showUserById(Integer userId) {
 		return ur.findById(userId);
 	}
-	
-}
 
+	public Users getUserByEmail(String email) {
+
+		return ur.findByEmail(email);
+	}
+}
